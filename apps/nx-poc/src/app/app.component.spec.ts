@@ -1,13 +1,24 @@
-import { Component } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import { async, TestBed } from '@angular/core/testing';
+
+import { Todo } from '@nx-poc/api-interfaces';
+
+import { Observable, of } from 'rxjs';
+
 import { AppComponent } from './app.component';
+import { AppService } from './service/app.service';
 
 describe('AppComponent', () => {
+  const data: Todo[] = [{ title: 'Todo 1' }, { title: 'Todo 2' }];
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [HttpClientModule],
+      providers: [
+        { provide: AppService, useClass: class {
+          getTodos: () => Observable<Todo[]> = () => of(data);
+          addTodo: () => Observable<Todo[]> = () => of(data);
+        }}
+      ]
     }).compileComponents();
   }));
 

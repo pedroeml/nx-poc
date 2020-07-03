@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@nx-poc/api-interfaces';
+
+import { Todo } from '@nx-poc/api-interfaces';
+
+import { AppService } from './service/app.service';
 
 @Component({
   selector: 'nx-poc-root',
@@ -8,6 +10,21 @@ import { Message } from '@nx-poc/api-interfaces';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+  todos: Todo[] = [];
+
+  constructor(private readonly service: AppService) {
+    this.service.getTodos().subscribe(
+      todos => {
+        this.todos = todos;
+      }
+    );
+  }
+
+  public addTodo() {
+    this.service.addTodo().subscribe(
+      todos => {
+        this.todos = todos;
+      },
+    );
+  }
 }

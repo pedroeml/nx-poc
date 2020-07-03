@@ -1,5 +1,7 @@
 import { Test } from '@nestjs/testing';
 
+import { Todo } from '@nx-poc/api-interfaces';
+
 import { AppService } from './app.service';
 
 describe('AppService', () => {
@@ -14,8 +16,10 @@ describe('AppService', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
-      expect(service.getData()).toEqual({ message: 'Welcome to api!' });
+    const data: Todo[] = [{ title: 'Todo 1' }, { title: 'Todo 2' }];
+
+    it('should return Todos data', () => {
+      expect(service.getData()).toEqual(data);
     });
   });
 });
