@@ -12,6 +12,7 @@
     "build": "ng build",
     "test": "ng test",
     "test:server": "nx test api",
+    "test:all": "nx affected:test --all",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",

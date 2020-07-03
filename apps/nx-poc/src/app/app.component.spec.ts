@@ -4,6 +4,7 @@ import { Todo } from '@nx-poc/api-interfaces';
 
 import { Observable, of } from 'rxjs';
 
+import { UiModule } from '../../../../libs/ui/src/lib/ui.module';
 import { AppComponent } from './app.component';
 import { AppService } from './service/app.service';
 
@@ -12,7 +13,12 @@ describe('AppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [
+        AppComponent,
+      ],
+      imports: [
+        UiModule,
+      ],
       providers: [
         { provide: AppService, useClass: class {
           getTodos: () => Observable<Todo[]> = () => of(data);

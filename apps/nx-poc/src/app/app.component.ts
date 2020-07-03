@@ -10,7 +10,7 @@ import { AppService } from './service/app.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  todos: Todo[] = [];
+  public todos: Todo[] = [];
 
   constructor(private readonly service: AppService) {
     this.service.getTodos().subscribe(
